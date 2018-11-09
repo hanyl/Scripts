@@ -34,7 +34,7 @@ void convert_Astra_To_RFTrack(){
 
     // For Bunch6dT
     Double_t mass = 0.511; // MeV
-    Int_t N = 6.25e9/1e4;
+    Int_t N = 6.2415093e+09/1e4;
     Int_t Q =-1;
     ofile<< x<<"\t"<<px<<"\t"<<y<<"\t"<<py<<"\t"<<z<<"\t"<<pz<<"\t"<<mass<<"\t"<<Q<<"\t"<<N<<"\t"<<time<<std::endl;
   }
