@@ -1,7 +1,7 @@
 //void convert_RFTrack_To_PLACET(TString &infileName, TString &outfileName){
 void convert_Astra_To_PLACET(){
  
-  Double_t px,py,pz,p,x,y,z,charge;
+  Double_t px,py,pz,pz0,p,x,y,z,charge;
   Double_t ref_pz;
   Double_t xp,yp,energy;
   Double_t time;
@@ -15,8 +15,9 @@ void convert_Astra_To_PLACET(){
 
   Double_t m_e = 0.511e-3; // GeV
 
+  Int_t line_num = 0;
 
-  std::ifstream ifile("rfgun_FD_2.0600.001",ios_base::in);
+  std::ifstream ifile("rfgun.0500.001",ios_base::in);
   std::ofstream ofile("output_Astra_linac_placet.dat",ios_base::out);
   while(getline(ifile,line)){
 
@@ -26,17 +27,20 @@ void convert_Astra_To_PLACET(){
 
     iss>>x>>y>>z>>px>>py>>pz>>time>>charge>>part_index>>flag;
 
-    if ( flag == -99 ){
-      ref_pz = pz;
-      continue;
+    line_num++;
+    if (1==line_num){
+      pz0 = pz;
+      z = 0;
+      time=0;
+    } else {
+      pz += pz0;
     }
 
-    if ( flag == 5 ){
+    if ( flag > 0 ){
       x *= 1.0e6;   // meter to micron meter
       y *= 1.0e6;   // meter to micron meter
       z *= 1.0e6;   //  meter to micron meter
-      pz += ref_pz;
-      p = sqrt(px*px+py*py+pz*pz); 
+      p = sqrt(px*px+py*py+pz*pz)*1e-9; 
 
       //energy = hypot(p,m_e);  // GeV
       energy = sqrt(p*p + m_e*m_e);  // GeV
