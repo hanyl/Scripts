@@ -19,6 +19,10 @@ axis([0 50 0 200]);
 xlabel('\sigma_{pos} (\mum)');
 ylabel('\Delta\epsilon_{x} (nm\cdotrad)');
 
+
+
+%%%set (gca,'yscale','log’);
+
 legend('1:1(90%)','1:1','DFS(90%)','DFS','Budget',"location", "northeast");
 
 title(['weight = 25']);

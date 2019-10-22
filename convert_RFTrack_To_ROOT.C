@@ -33,7 +33,7 @@ void convert_RFTrack_To_ROOT(TString infileName){
     pz = abs(pc/sqrt((1 + xp*xp + yp*yp)));
     std::cout<<"pz is"<<pz<<std::endl;
     px = xp*pz;
-    py = xp*pz;
+    py = yp*pz;
 
     e = sqrt(pc*pc+0.511*0.511*1e-6);  // GeV
 

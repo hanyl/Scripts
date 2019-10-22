@@ -20,7 +20,7 @@ void convert_ROOT_To_RFTrack(const char *fileName){
   tree->SetBranchAddress("t",&time);
 
   std::ofstream ofile("target_" + TString(fileName) + ".dat"); 
-  ofile<<"# x(mm)   yp(mrad)   y(mm)   yp(mrad)  time(mm/c)  Pc(MeV)"<<std::endl;
+  ofile<<"# x(mm)   xp(mrad)   y(mm)   yp(mrad)  time(mm/c)  Pc(MeV)"<<std::endl;
   
   Double_t mean_t = 0;
   Int_t N_positron = 0;

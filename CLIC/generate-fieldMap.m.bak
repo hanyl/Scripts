@@ -1,0 +1,63 @@
+function [Bx,By,Bz] = magnetic_field(x,y,z)
+   B0 = 6.0;  ### Tesla
+   mu = 55;   ### m^-1
+
+   rho = sqrt(x*x+y*y);
+   Bz = B0 / (1 + mu*z);
+   Br = rho * B0 * mu / (1+mu*z)/(1+mu*z); 
+
+   if (x == 0) 
+     Bx = 0;
+   else 
+     Bx = Br / sqrt(1+y*y/x/x);
+   endif
+   
+
+   By = sqrt( Br * Br - Bx*Bx);
+
+endfunction
+
+
+rho_AMD = 0.02;  ## meter
+Length = 0.2;   ## meter
+
+delta_rho = 0.02;
+delta_phi = 0.01;
+delta_Length = 0.01;
+
+PI = 3.1415926;
+
+#for rho = 0 : rho_AMD * delta_rho : rho_AMD
+#  for phi = 0 : 2 * PI * delta_phi : 2 * PI
+#    for z = 0 : Length * delta_Length : Length
+#      x = rho * cos(phi);
+#      y = rho * sin(phi);
+#      [Bx,By,Bz] = magnetic_field(x,y,z)
+#    endfor
+#  endfor
+#endfor
+
+
+delta_rho = 0.02;
+delta_phi = 0.01;
+delta_Length = 0.01;
+
+M.xa = (-rho_AMD : rho_AMD * delta_rho : rho_AMD)';
+M.ya = M.xa ;
+M.za = (0 : Length * delta_Length : Length)';
+
+for i = 1 : 1/delta_rho*2 + 1
+    x = M.xa(i);
+  for j = 1 : 1/delta_rho*2 + 1
+    y = M.ya(j);
+    for k = 1 : 1/delta_Length + 1
+       z = M.za(k);
+       [Bx,By,Bz] = magnetic_field(x,y,z);
+       M.Bx(i,j,k) = Bx;
+       M.By(i,j,k) = By;
+       M.Bz(i,j,k) = Bz;
+    endfor
+  endfor
+endfor
+
+save("field_xy.dat","M");
