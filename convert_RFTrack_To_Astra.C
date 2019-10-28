@@ -19,7 +19,7 @@ void convert_Astra_To_RFTrack(){
     if (!line.length() || line[0] == '#')
       continue;
     std::istringstream iss(line);
-    iss<< x<<xp<<y<<yp<<time<<pc<<std::endl;
+    iss>>x>>xp>>y>>yp>>time>>pc>>std::endl;
 
     xp *= 1e-3;
     yp *= 1e-3;
@@ -42,7 +42,7 @@ void convert_Astra_To_RFTrack(){
     //yp = py/pz*1e3; // milliradian
     //pc = sqrt(px*px+py*py+pz*pz);  //MeV
     //pc = 10 * 1e-6;  //eV to  MeV
-    ofile>>x>>y>>z>>px>>py>>pz>>time>>charge>>index>>flag;
+    ofile<<x<<y<<z<<px<<py<<pz<<time<<charge<<index<<flag;
   }
   ofile.close();
   ifile.close();
