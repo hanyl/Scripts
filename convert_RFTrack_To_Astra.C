@@ -42,7 +42,7 @@ void convert_Astra_To_RFTrack(){
     //yp = py/pz*1e3; // milliradian
     //pc = sqrt(px*px+py*py+pz*pz);  //MeV
     //pc = 10 * 1e-6;  //eV to  MeV
-    ofile<<x<<y<<z<<px<<py<<pz<<time<<charge<<index<<flag;
+    ofile<<x<<"\t"<<y<<"\t"<<z<<"\t"<<px<<"\t"<<py<<"\t"<<pz<<"\t"<<time<<"\t"<<charge<<"\t"<<index<<"\t"<<flag<<std::endl;
   }
   ofile.close();
   ifile.close();
