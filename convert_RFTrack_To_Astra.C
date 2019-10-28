@@ -26,7 +26,7 @@ void convert_Astra_To_RFTrack(){
 
     pz = abs(pc/sqrt((1 + xp*xp + yp*yp)));  //MeV
     px = xp*pz;
-    py = xp*pz;
+    py = yp*pz;
 
     
     x *= 1e-3; // meter <- millimeter
