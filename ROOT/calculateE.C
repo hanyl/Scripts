@@ -26,7 +26,7 @@ void calculateE(){
   TString ss = "abs(t-" + to_string(t0) + ")<<7.82/2 && e>0.1";
 
   TH1F *h2 = new TH1F("h2","histo E",100,0.1,0.3);
-  tree->Draw("e>>h2","e>0.1");
+  tree->Draw("e>>h2",ss);
   double mean_E = h2->GetMean();
 
   double omega = 2 * 3.1415926 * 2.856e9;
